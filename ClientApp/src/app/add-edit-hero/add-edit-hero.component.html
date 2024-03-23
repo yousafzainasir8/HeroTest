@@ -1,0 +1,30 @@
+<div class="container mt-3">
+  <h2>{{ isEditMode ? 'Edit' : 'Add' }} Hero</h2>
+  <form [formGroup]="heroForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="Name" class="form-label">Name</label>
+      <input type="text" class="form-control" id="Name" [class.is-invalid]="name?.invalid && name?.touched" formControlName="Name">
+      <div *ngIf="name?.invalid && name?.touched" class="invalid-feedback">
+        Name is required.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="Alias" class="form-label">Alias</label>
+      <input type="text" class="form-control" id="Alias" [class.is-invalid]="alias?.invalid && alias?.touched" formControlName="Alias">
+      <div *ngIf="alias?.invalid && alias?.touched" class="invalid-feedback">
+        Alias is required.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="brandId" class="form-label">Brand</label>
+      <select class="form-control" id="brandId" formControlName="BrandId" [class.is-invalid]="brandId?.invalid && brandId?.touched">
+        <option *ngFor="let brand of brands" [ngValue]="brand.Id">{{ brand.Name }}</option>
+      </select>
+      <div *ngIf="brandId?.invalid && brandId?.touched" class="invalid-feedback">
+        Selecting a brand is required.
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Update' : 'Add' }} Hero</button>
+  </form>
+</div>
